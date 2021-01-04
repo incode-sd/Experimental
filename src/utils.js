@@ -53,3 +53,20 @@ export async function getHomepageHotels() {
       });
   });
 }
+export async function getBookedHotelList() {
+  return new Promise((resolve, reject) => {
+    const hotelsData = api(`${BASE_URL}/5a7f23442e00005000b56873`);
+    const hotelPrices = api(`${BASE_URL}/5a7f24f02e00005200b56875`);
+    Promise.all([hotelsData, hotelPrices])
+      .then(([data, prices]) => {
+        const dataWithPrices = data.data.map((el) => {
+          const item = prices.data.find((price) => price.id === el.id);
+          return { ...el, ...item };
+        });
+        resolve(dataWithPrices);
+      })
+      .catch((err) => {
+        reject(err.message);
+      });
+  });
+}
