@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav className="mb-16 navbar">
       <Link to="/" className="navbar--brand">
         {" "}
-        treebo
+        Hotels
       </Link>
     </nav>
   );
